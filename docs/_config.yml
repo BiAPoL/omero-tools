@@ -1,5 +1,6 @@
 title: "OMERO Tools"
 author: "BiAPoL"
+logo: "biapol_logo.png"
 
 execute:
   execute_notebooks: off
