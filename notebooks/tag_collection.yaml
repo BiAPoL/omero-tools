@@ -131,3 +131,5 @@ Tagset_imaging_method:
       description: ""
     - name: "FLIM"
       description: "Fluorescence lifetime imaging"
+    - name: "DIC"
+      description: "Differential interference contrast"
