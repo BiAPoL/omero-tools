@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Synchronize tags across groups &#8212; OMERO Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/synchronize_tags';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="How to transfer a dataset between two omero instances" href="../instructions/transfer_dataset.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">OMERO Tools</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Omero-tools
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../instructions/transfer_dataset.html">How to transfer a dataset between two omero instances</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Synchronize tags across groups</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/synchronize_tags.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Synchronize tags across groups</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Synchronize tags across groups</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="synchronize-tags-across-groups">
+<h1>Synchronize tags across groups<a class="headerlink" href="#synchronize-tags-across-groups" title="Link to this heading">#</a></h1>
+<p>To make sure that there is some standardization across projects with regard to how data is tagged and annotated, we need to synchronize tags across groups. The goal is to make sure that the tags used in the data are consistent across groups. This will make it easier to search for data and to use the data in the future. The defined tags themselves are based off of the <a class="reference external" href="https://www.nature.com/articles/s41592-021-01166-8">REMBI metadata schema</a>. More specifically, we orient ourselves on the tags used in the <a class="reference external" href="https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit">provided spreadsheet</a>.</p>
+<p>To install the necessary packages, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>install<span class="w"> </span>omero-py<span class="w"> </span>ezomero<span class="w"> </span>-c<span class="w"> </span>bioconda
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omero.gateway</span> <span class="kn">import</span> <span class="n">BlitzGateway</span>
+<span class="kn">import</span> <span class="nn">omero</span>
+<span class="kn">import</span> <span class="nn">omero.gateway</span>
+<span class="kn">from</span> <span class="nn">omero.rtypes</span> <span class="kn">import</span> <span class="n">rstring</span><span class="p">,</span> <span class="n">rlong</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">ezomero</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h1>
+<p>We create user that is called <code class="docutils literal notranslate"><span class="pre">tag-man</span></code> and make sure that this user is member of all groups to which we want to synchronize tags. We then add these groups to the groups we want to synchronize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace these with your OMERO server credentials</span>
+<span class="n">OMERO_HOST</span> <span class="o">=</span> <span class="s1">&#39;omero-int.biotec.tu-dresden.de&#39;</span>
+<span class="n">OMERO_PORT</span> <span class="o">=</span> <span class="mi">4064</span>
+<span class="n">OMERO_USER</span> <span class="o">=</span> <span class="s1">&#39;tag-man&#39;</span>
+<span class="n">OMERO_PASS</span> <span class="o">=</span>  <span class="c1"># add tag-man password here</span>
+<span class="n">OMERO_SECURE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">TAG_SET_NAMESPACE</span> <span class="o">=</span> <span class="s1">&#39;openmicroscopy.org/omero/insight/tagset&#39;</span>
+
+<span class="n">TARGET_GROUPS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BiAPoL&#39;</span><span class="p">,</span> <span class="s1">&#39;Campas Lab&#39;</span><span class="p">,</span> <span class="s1">&#39;Dye Lab&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need some utility functions to read tags from a tagset and to write tags to a tagset. We also need a function to synchronize tags across groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_yaml</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_user_tag_sets</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">sys</span><span class="o">.</span><span class="n">ParametersI</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span> <span class="n">rlong</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="n">rstring</span><span class="p">(</span><span class="n">namespace</span><span class="p">))</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    select t from TagAnnotation t</span>
+<span class="s2">    join fetch t.details.owner as owner</span>
+<span class="s2">    where owner.id = :uid and t.ns = :ns</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">tag_sets</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getQueryService</span><span class="p">()</span><span class="o">.</span><span class="n">findAllByQuery</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">tag_set</span><span class="o">.</span><span class="n">textValue</span><span class="o">.</span><span class="n">val</span><span class="p">:</span> <span class="n">tag_set</span> <span class="k">for</span> <span class="n">tag_set</span> <span class="ow">in</span> <span class="n">tag_sets</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">create_tag_set</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+    <span class="n">tag_set</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">()</span>
+    <span class="n">tag_set</span><span class="o">.</span><span class="n">textValue</span> <span class="o">=</span> <span class="n">rstring</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">tag_set</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">rstring</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+    <span class="n">tag_set</span><span class="o">.</span><span class="n">ns</span> <span class="o">=</span> <span class="n">rstring</span><span class="p">(</span><span class="n">namespace</span><span class="p">)</span>
+    <span class="n">tag_set</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ExperimenterI</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">tag_set</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">list_tags_in_tagset</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tagset_name</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">sys</span><span class="o">.</span><span class="n">ParametersI</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span> <span class="n">rlong</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="n">rstring</span><span class="p">(</span><span class="n">namespace</span><span class="p">))</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">rstring</span><span class="p">(</span><span class="n">tagset_name</span><span class="p">))</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    select t from TagAnnotation t</span>
+<span class="s2">    join fetch t.details.owner as owner</span>
+<span class="s2">    where owner.id = :uid and t.ns = :ns and t.textValue = :name</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">tag_sets</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getQueryService</span><span class="p">()</span><span class="o">.</span><span class="n">findAllByQuery</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tag_sets</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No tag set found with the name &#39;</span><span class="si">{</span><span class="n">tagset_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">tag_set</span> <span class="o">=</span> <span class="n">tag_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Load annotations linked to the tag set</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getAnnotationLinks</span><span class="p">(</span><span class="s1">&#39;TagAnnotation&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">tag_set</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">val</span><span class="p">])</span>
+    <span class="n">tag_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">link</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">textValue</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">tag_names</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lastly, this function will be called and iterates over every group that is part of the synchronization process (see above) and synchronizes the tags. For this, it checks existing tags and tagsets. If there is a tag that exists in the <a class="reference download internal" download="" href="../_downloads/663dccf7d5a370162573ddc8ac7db23d/tag_collection.yaml"><span class="xref download myst">local collection of tags</span></a> but doesn’t exist in the remote tagset, it will be added. If a tag exists remotely but not locally in the preset collection, nothing happens. This makes sure that users can add their own individual tags to the tagmanager without them being overwritten by the synchronization process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synchronize_tags</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">local_tag_collection</span><span class="p">):</span>
+
+    <span class="c1"># Get the currently connected user&#39;s ID</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getUserId</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Currently connected user&#39;s ID: </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Process each tag set</span>
+    <span class="n">existing_tag_sets</span> <span class="o">=</span> <span class="n">get_user_tag_sets</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">TAG_SET_NAMESPACE</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">tagset</span> <span class="ow">in</span> <span class="n">local_tag_collection</span><span class="p">:</span>
+        <span class="n">tagset_name</span> <span class="o">=</span> <span class="n">local_tag_collection</span><span class="p">[</span><span class="n">tagset</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">tagset_description</span> <span class="o">=</span> <span class="n">local_tag_collection</span><span class="p">[</span><span class="n">tagset</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+        
+        <span class="c1"># Check if tag set exists in OMERO</span>
+        <span class="k">if</span> <span class="n">tagset_name</span> <span class="ow">in</span> <span class="n">existing_tag_sets</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tag set &#39;</span><span class="si">{</span><span class="n">tagset_name</span><span class="si">}</span><span class="s2">&#39; already exists in OMERO.&quot;</span><span class="p">)</span>
+            <span class="n">tag_set</span> <span class="o">=</span> <span class="n">existing_tag_sets</span><span class="p">[</span><span class="n">tagset_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating tag set &#39;</span><span class="si">{</span><span class="n">tagset_name</span><span class="si">}</span><span class="s2">&#39; in OMERO.&quot;</span><span class="p">)</span>
+            <span class="n">tag_set</span> <span class="o">=</span> <span class="n">create_tag_set</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tagset_name</span><span class="p">,</span> <span class="n">tagset_description</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">TAG_SET_NAMESPACE</span><span class="p">)</span>
+
+        <span class="n">tags_in_tagset</span> <span class="o">=</span> <span class="n">list_tags_in_tagset</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tagset_name</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">TAG_SET_NAMESPACE</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">local_tag_collection</span><span class="p">[</span><span class="n">tagset</span><span class="p">][</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">local_tag_collection</span><span class="p">[</span><span class="n">tagset</span><span class="p">][</span><span class="s1">&#39;tags&#39;</span><span class="p">]:</span>    
+            <span class="n">tag_name</span> <span class="o">=</span> <span class="n">tag</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">tag_description</span> <span class="o">=</span> <span class="n">tag</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">tag_name</span> <span class="ow">in</span> <span class="n">tags_in_tagset</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Tag &#39;</span><span class="si">{</span><span class="n">tag_name</span><span class="si">}</span><span class="s2">&#39; already exists in tag set &#39;</span><span class="si">{</span><span class="n">tagset_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Creating tag &#39;</span><span class="si">{</span><span class="n">tag_name</span><span class="si">}</span><span class="s2">&#39; in tag set &#39;</span><span class="si">{</span><span class="n">tagset_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                <span class="n">tag_annotation</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">()</span>
+                <span class="n">tag_annotation</span><span class="o">.</span><span class="n">textValue</span> <span class="o">=</span> <span class="n">rstring</span><span class="p">(</span><span class="n">tag_name</span><span class="p">)</span>
+                <span class="n">tag_annotation</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">rstring</span><span class="p">(</span><span class="n">tag_description</span><span class="p">)</span>
+                <span class="n">tag_annotation</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ExperimenterI</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">tag_annotation</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">tag_annotation</span><span class="p">)</span>
+
+                <span class="c1"># Link the new tag to the tag set</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">AnnotationAnnotationLinkI</span><span class="p">()</span>
+                <span class="n">link</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">(</span><span class="n">tag_set</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">link</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">(</span><span class="n">tag_annotation</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+                <span class="n">tag_annotation</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ExperimenterI</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">tag_annotation</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">tag_annotation</span><span class="p">)</span>
+
+                <span class="c1"># Link the new tag to the tag set</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">AnnotationAnnotationLinkI</span><span class="p">()</span>
+                <span class="n">link</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">(</span><span class="n">tag_set</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">link</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">omero</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">TagAnnotationI</span><span class="p">(</span><span class="n">tag_annotation</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="c1">#conn.getUpdateService().saveAndReturnObject(link)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s show all the tagsets and tags in our local collection and then synchronize them across groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the YAML document</span>
+<span class="n">yaml_file_path</span> <span class="o">=</span> <span class="s1">&#39;./tag_collection.yaml&#39;</span>  <span class="c1"># Replace with the actual path to your YAML file</span>
+<span class="n">local_tag_collection</span> <span class="o">=</span> <span class="n">load_yaml</span><span class="p">(</span><span class="n">yaml_file_path</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">OMERO_GROUP</span> <span class="ow">in</span> <span class="n">TARGET_GROUPS</span><span class="p">:</span>
+    <span class="c1"># Connect to OMERO</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">OMERO_USER</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">OMERO_PASS</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">OMERO_HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">OMERO_PORT</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">OMERO_GROUP</span><span class="p">)</span>
+    <span class="n">synchronize_tags</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">local_tag_collection</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Currently connected user&#39;s ID: 212
+Tag set &#39;Biological entity&#39; already exists in OMERO.
+	Tag &#39;Brain&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Cell Culture&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Cells&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Embryo&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Eye&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Fin&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Gastro-intestinal&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Organoid&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Spheroid&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Tail&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Whole organism&#39; already exists in tag set &#39;Biological entity&#39;.
+	Tag &#39;Wing Disk&#39; already exists in tag set &#39;Biological entity&#39;.
+Tag set &#39;Organism&#39; already exists in OMERO.
+	Tag &#39;C. elegans&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Drosophila&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Fish&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Human&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Mouse&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Rat&#39; already exists in tag set &#39;Organism&#39;.
+	Tag &#39;Zebrafish&#39; already exists in tag set &#39;Organism&#39;.
+Tag set &#39;Experimental status&#39; already exists in OMERO.
+	Tag &#39;Control&#39; already exists in tag set &#39;Experimental status&#39;.
+	Tag &#39;Disease&#39; already exists in tag set &#39;Experimental status&#39;.
+	Tag &#39;Drug&#39; already exists in tag set &#39;Experimental status&#39;.
+	Tag &#39;Mutant&#39; already exists in tag set &#39;Experimental status&#39;.
+	Tag &#39;Test&#39; already exists in tag set &#39;Experimental status&#39;.
+Tag set &#39;Experimental variable&#39; already exists in OMERO.
+	Tag &#39;Concentration&#39; already exists in tag set &#39;Experimental variable&#39;.
+	Tag &#39;Dose&#39; already exists in tag set &#39;Experimental variable&#39;.
+	Tag &#39;Time&#39; already exists in tag set &#39;Experimental variable&#39;.
+	Tag &#39;Temperature&#39; already exists in tag set &#39;Experimental variable&#39;.
+	Tag &#39;pH&#39; already exists in tag set &#39;Experimental variable&#39;.
+Tag set &#39;Extrinsic variable&#39; already exists in OMERO.
+Tag set &#39;Intrinsic variable&#39; already exists in OMERO.
+	Tag &#39;Tumor&#39; already exists in tag set &#39;Intrinsic variable&#39;.
+	Tag &#39;Wild type&#39; already exists in tag set &#39;Intrinsic variable&#39;.
+Tag set &#39;Image data type&#39; already exists in OMERO.
+	Tag &#39;Raw data&#39; already exists in tag set &#39;Image data type&#39;.
+	Tag &#39;Processed&#39; already exists in tag set &#39;Image data type&#39;.
+	Tag &#39;Segmentation&#39; already exists in tag set &#39;Image data type&#39;.
+	Tag &#39;Stitched&#39; already exists in tag set &#39;Image data type&#39;.
+	Tag &#39;Annotation&#39; already exists in tag set &#39;Image data type&#39;.
+	Tag &#39;Denoised&#39; already exists in tag set &#39;Image data type&#39;.
+Tag set &#39;Imaging method&#39; already exists in OMERO.
+	Tag &#39;Confocal&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Fluorescence&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Lightsheet&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;EM&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Widefield&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Brightfield&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Two-photon&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Spinning Disk&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;Laser Scanning&#39; already exists in tag set &#39;Imaging method&#39;.
+	Tag &#39;FLIM&#39; already exists in tag set &#39;Imaging method&#39;.
+Currently connected user&#39;s ID: 212
+Creating tag set &#39;Biological entity&#39; in OMERO.
+	Creating tag &#39;Brain&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Cell Culture&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Cells&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Embryo&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Eye&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Fin&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Gastro-intestinal&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Organoid&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Spheroid&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Tail&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Whole organism&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Wing Disk&#39; in tag set &#39;Biological entity&#39;.
+Creating tag set &#39;Organism&#39; in OMERO.
+	Creating tag &#39;C. elegans&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Drosophila&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Fish&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Human&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Mouse&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Rat&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Zebrafish&#39; in tag set &#39;Organism&#39;.
+Creating tag set &#39;Experimental status&#39; in OMERO.
+	Creating tag &#39;Control&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Disease&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Drug&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Mutant&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Test&#39; in tag set &#39;Experimental status&#39;.
+Creating tag set &#39;Experimental variable&#39; in OMERO.
+	Creating tag &#39;Concentration&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Dose&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Time&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Temperature&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;pH&#39; in tag set &#39;Experimental variable&#39;.
+Creating tag set &#39;Extrinsic variable&#39; in OMERO.
+Creating tag set &#39;Intrinsic variable&#39; in OMERO.
+	Creating tag &#39;Tumor&#39; in tag set &#39;Intrinsic variable&#39;.
+	Creating tag &#39;Wild type&#39; in tag set &#39;Intrinsic variable&#39;.
+Creating tag set &#39;Image data type&#39; in OMERO.
+	Creating tag &#39;Raw data&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Processed&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Segmentation&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Stitched&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Annotation&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Denoised&#39; in tag set &#39;Image data type&#39;.
+Creating tag set &#39;Imaging method&#39; in OMERO.
+	Creating tag &#39;Confocal&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Fluorescence&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Lightsheet&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;EM&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Widefield&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Brightfield&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Two-photon&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Spinning Disk&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Laser Scanning&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;FLIM&#39; in tag set &#39;Imaging method&#39;.
+Currently connected user&#39;s ID: 212
+Creating tag set &#39;Biological entity&#39; in OMERO.
+	Creating tag &#39;Brain&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Cell Culture&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Cells&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Embryo&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Eye&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Fin&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Gastro-intestinal&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Organoid&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Spheroid&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Tail&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Whole organism&#39; in tag set &#39;Biological entity&#39;.
+	Creating tag &#39;Wing Disk&#39; in tag set &#39;Biological entity&#39;.
+Creating tag set &#39;Organism&#39; in OMERO.
+	Creating tag &#39;C. elegans&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Drosophila&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Fish&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Human&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Mouse&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Rat&#39; in tag set &#39;Organism&#39;.
+	Creating tag &#39;Zebrafish&#39; in tag set &#39;Organism&#39;.
+Creating tag set &#39;Experimental status&#39; in OMERO.
+	Creating tag &#39;Control&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Disease&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Drug&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Mutant&#39; in tag set &#39;Experimental status&#39;.
+	Creating tag &#39;Test&#39; in tag set &#39;Experimental status&#39;.
+Creating tag set &#39;Experimental variable&#39; in OMERO.
+	Creating tag &#39;Concentration&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Dose&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Time&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;Temperature&#39; in tag set &#39;Experimental variable&#39;.
+	Creating tag &#39;pH&#39; in tag set &#39;Experimental variable&#39;.
+Creating tag set &#39;Extrinsic variable&#39; in OMERO.
+Creating tag set &#39;Intrinsic variable&#39; in OMERO.
+	Creating tag &#39;Tumor&#39; in tag set &#39;Intrinsic variable&#39;.
+	Creating tag &#39;Wild type&#39; in tag set &#39;Intrinsic variable&#39;.
+Creating tag set &#39;Image data type&#39; in OMERO.
+	Creating tag &#39;Raw data&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Processed&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Segmentation&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Stitched&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Annotation&#39; in tag set &#39;Image data type&#39;.
+	Creating tag &#39;Denoised&#39; in tag set &#39;Image data type&#39;.
+Creating tag set &#39;Imaging method&#39; in OMERO.
+	Creating tag &#39;Confocal&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Fluorescence&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Lightsheet&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;EM&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Widefield&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Brightfield&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Two-photon&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Spinning Disk&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;Laser Scanning&#39; in tag set &#39;Imaging method&#39;.
+	Creating tag &#39;FLIM&#39; in tag set &#39;Imaging method&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../instructions/transfer_dataset.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How to transfer a dataset between two omero instances</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Synchronize tags across groups</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By BiAPoL
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
