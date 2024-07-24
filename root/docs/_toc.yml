@@ -1,6 +1,0 @@
-format: jb-book
-root: index
-
-chapters:
-  - file: instructions/Transfer_dataset.md
-  - file: notebooks/synchronize_tags.ipynb

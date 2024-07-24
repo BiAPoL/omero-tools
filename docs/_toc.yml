@@ -1,0 +1,6 @@
+format: jb-book
+root: index
+
+chapters:
+  - file: instructions/transfer_dataset
+  - file: notebooks/synchronize_tags
