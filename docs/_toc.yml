@@ -2,5 +2,7 @@ format: jb-book
 root: index
 
 chapters:
+  - file: notebooks/read_and_write/read_and_write
   - file: instructions/transfer_dataset
   - file: notebooks/synchronize_tags
+  
