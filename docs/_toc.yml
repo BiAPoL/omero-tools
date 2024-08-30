@@ -3,6 +3,9 @@ root: index
 
 chapters:
   - file: notebooks/read_and_write/read_and_write
+  - file: notebooks/metadata/Readme
+    sections:
+    - file: notebooks/metadata/key_value_pairs
   - file: instructions/transfer_dataset
   - file: notebooks/synchronize_tags
   
