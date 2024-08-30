@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Read and write data to OMERO from Python &#8212; OMERO Tools</title>
+    <title>Reading, writing and editing key-value pairs &#8212; OMERO Tools</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/read_and_write/read_and_write';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/metadata/key_value_pairs';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Metadata" href="../metadata/Readme.html" />
-    <link rel="prev" title="Omero-tools" href="../../index.html" />
+    <link rel="next" title="How to transfer a dataset between two omero instances" href="../../instructions/transfer_dataset.html" />
+    <link rel="prev" title="Metadata" href="Readme.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,9 +180,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Read and write data to OMERO from Python</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../metadata/Readme.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../metadata/key_value_pairs.html">Reading, writing and editing key-value pairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../read_and_write/read_and_write.html">Read and write data to OMERO from Python</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Readme.html">Metadata</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Reading, writing and editing key-value pairs</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../instructions/transfer_dataset.html">How to transfer a dataset between two omero instances</a></li>
@@ -242,7 +242,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/read_and_write/read_and_write.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/metadata/key_value_pairs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +326,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Read and write data to OMERO from Python</h1>
+    <h1>Reading, writing and editing key-value pairs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -336,8 +336,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upoading-data-to-omero">Upoading data to OMERO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data-from-omero">Reading data from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-key-value-pairs">Adding key value pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-key-value-pair-from-omero">Reading a key-value pair from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-key-value-pairs">Edit key-value pairs</a></li>
 </ul>
             </nav>
         </div>
@@ -349,31 +350,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="read-and-write-data-to-omero-from-python">
-<span id="omero-io-read-and-write"></span><h1>Read and write data to OMERO from Python<a class="headerlink" href="#read-and-write-data-to-omero-from-python" title="Link to this heading">#</a></h1>
-<p>This tutorial will show a few simple ways to read and load data from and to a remote OMERO server using Python. For this purpose, we will use primarily the <a class="reference external" href="https://pypi.org/project/ezomero/">ezomero</a> library, which is a Python wrapper around the OMERO API. Needless to say, that’ll have to be installed first:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>ezomero<span class="w"> </span>scikit-image<span class="w"> </span>numpy<span class="w"> </span>-c<span class="w"> </span>bioconda
-</pre></div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="reading-writing-and-editing-key-value-pairs">
+<h1>Reading, writing and editing key-value pairs<a class="headerlink" href="#reading-writing-and-editing-key-value-pairs" title="Link to this heading">#</a></h1>
+<p>Key value pairs are a key (pun intended) part of annotating data in OMERO in a very flexible way. In essence, they provide a way of adding Python dictionaries to an image, a project or a dataset - and a Python dictionary is fit for data of virtually any form. Here are a few ways of interacting with data in this form through Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ezomero</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">omero.rtypes</span> <span class="kn">import</span> <span class="n">rstring</span><span class="p">,</span> <span class="n">rlong</span>
 </pre></div>
 </div>
 </div>
-</div>
-<p>The first thing we always need to do when working with omero from code: We need to connect to the server. Ezomero provides a simple way to do this.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Before connecting, you may have to connect to the VPN of your institution if you are not on the same network as the OMERO server.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;omero-int.biotec.tu-dresden.de&#39;</span>
-<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;my-user-name&#39;</span>  <span class="c1"># replace this with your username</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;johamuel&#39;</span>  <span class="c1"># replace this with your username</span>
 <span class="n">secure</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">port</span> <span class="o">=</span> <span class="mi">4064</span>
 <span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
@@ -383,85 +374,124 @@ document.write(`
 </div>
 </div>
 </div>
-<p>…and you are connected. Note that there may be an idle timeout in place for the connection. This means, that if you do not send or receive data from the server within a given period, the connection will reset and you will have to reconnect. This is not a problem, but it is something to keep in mind.</p>
-<section id="upoading-data-to-omero">
-<h2>Upoading data to OMERO<a class="headerlink" href="#upoading-data-to-omero" title="Link to this heading">#</a></h2>
-<p>Let’s first talk about uploading. ezomero provides two general ways to do it and both have their advantages and disadvantages. In this tutorial, we only conver one in greater detail. The two options are:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://thejacksonlaboratory.github.io/ezomero/ezomero.html#ezomero.post_image"><code class="docutils literal notranslate"><span class="pre">ezomero.post_image</span></code></a> - allows you to upload an image which you have to read into memory first.</p></li>
-<li><p><a class="reference external" href="https://thejacksonlaboratory.github.io/ezomero/ezomero.html#ezomero.ezimport"><code class="docutils literal notranslate"><span class="pre">ezomero.ezimport</span></code></a> - allows you to upload an image directly from a file on disk.</p></li>
-</ul>
-<p>In this tutorial, we will focus on the first option. The second option is more efficient for large files, but it is also more complex to use and currentlly not recommended as it has not seen much testing.</p>
+<section id="adding-key-value-pairs">
+<h2>Adding key value pairs<a class="headerlink" href="#adding-key-value-pairs" title="Link to this heading">#</a></h2>
+<p>Let’s add some kv pairs from a Python dictionary. In the OMERO terminology, key value pairs are referred to as “map annotations”, so that’s the function we’ll need to use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s1">&#39;Patient name&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here we directly need to watch out. OMERO <em>always</em> requires data to be passed in 5D, with the five dimensions referring to time, channel and z/y/x. You can add singleton dimensions which won’t make your data any larger like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_5d</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">image_5d</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_id</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_map_annotation</span><span class="p">(</span>
+    <span class="n">conn</span><span class="p">,</span>
+    <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span>
+    <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">,</span>
+    <span class="n">kv_dict</span><span class="o">=</span><span class="n">kv_pairs</span><span class="p">,</span>
+    <span class="n">ns</span><span class="o">=</span><span class="s1">&#39;openmicroscopy.org/omero/client/mapAnnotation&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_id</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1, 64, 64, 64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object group 3
+8257
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_id</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_image</span><span class="p">(</span>
-    <span class="n">conn</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span>
-    <span class="n">image</span><span class="o">=</span><span class="n">image_5d</span><span class="p">,</span>
-    <span class="n">image_name</span><span class="o">=</span><span class="s1">&#39;test_array&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;An array to demonstrate omero&#39;</span><span class="p">,</span>
-    <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;tczyx&#39;</span><span class="p">)</span>
-</pre></div>
+<p>If you check out your image on OMERo, you see the posted key-value pairs:</p>
+<p><img alt="kv-pairs" src="../../_images/kv_pairs.PNG" /></p>
+<p>Let’s quickly talk about the elephant the room: What exactly is the <code class="docutils literal notranslate"><span class="pre">ns</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">post_map_annotation</span></code> function? It stands for “namespace” and is a way of grouping key-value pairs. If you have a lot of key-value pairs, you might want to group them into different namespaces to keep things organized. If you don’t care about namespaces, you can just use an empty string. The default namespace is <code class="docutils literal notranslate"><span class="pre">'openmicroscopy.org/omero/client/mapAnnotation'</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you set the namespace to a value different from ‘<a class="reference external" href="http://openmicroscopy.org/omero/client/mapAnnotation">openmicroscopy.org/omero/client/mapAnnotation</a>’, you will not be able to edit the key-value pairs in the OMERO web interface.</p>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Using this function to save images to OMERO is not recommended when `transfer=ln_s` is the primary mechanism for data import on your OMERO instance. Please consult with your OMERO administrator.
-</pre></div>
-</div>
-</div>
-</div>
-<p>And there’s your data. You can see that what we set as the description further up now shows up on the server.</p>
-<p><img alt="Uploaded image" src="../../_images/capture.png" /></p>
 </section>
-<section id="reading-data-from-omero">
-<h2>Reading data from OMERO<a class="headerlink" href="#reading-data-from-omero" title="Link to this heading">#</a></h2>
-<p>Reading data from OMERO is similarly easy. ezomero provides the <code class="docutils literal notranslate"><span class="pre">get_image</span></code> function which allows you to download an image from the server. The function returns a numpy array and a metadata object. Again, you see that we get the resulting image with all previously added empty dimensions, which we need to account for when we handle it.</p>
+<section id="reading-a-key-value-pair-from-omero">
+<h2>Reading a key-value pair from OMERO<a class="headerlink" href="#reading-a-key-value-pair-from-omero" title="Link to this heading">#</a></h2>
+<p>Let’s now do it the other way round: read a key-value pair from OMERO. For this, we need a two-step process: We first need to retrieve all map annotations of a single image (there can be more than one) and then we can access the key-value pairs of the individual annotations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image_id</span><span class="o">=</span><span class="n">image_id</span><span class="p">,</span> <span class="n">no_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;tczyx&#39;</span><span class="p">)</span>
-<span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_ids</span><span class="p">)</span><span class="n">a</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1, 64, 64, 64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8257]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the first (and only) map annotation we just retrieved:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">map_ann_id</span><span class="o">=</span><span class="n">map_annotation_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">kv_pairs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Age&#39;: &#39;35&#39;, &#39;Patient name&#39;: &#39;John Doe&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="edit-key-value-pairs">
+<h2>Edit key-value pairs<a class="headerlink" href="#edit-key-value-pairs" title="Link to this heading">#</a></h2>
+<p>Lastly, let’s say we don’t want to read or write a kv pairs, but we really just want to edit a particular entry of a key-value dictionary. We start just as before by getting the map_annotation_id of the particular map annotation we are interested in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_ids</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8257]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we retrieve the map annotation as an omero object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapAnnotation</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MapAnnotation&#39;</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="n">map_annotation_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the new dictoinary we want to save.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Setting a key-value pair like this will overwrite the entire map annotation. If you want to keep the existing key-value pairs, you will need to read the existing key-value pairs first and then update or append the dictionary.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;36&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Patient name&#39;</span><span class="p">,</span> <span class="s1">&#39;John Doe2&#39;</span><span class="p">)</span>
+    <span class="p">]</span>  <span class="c1"># Note: the value should be a string - no integers allowed here</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()[</span><span class="mi">32</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the updated annotation</span>
+<span class="n">mapAnnotation</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">kv_pairs</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveObject</span><span class="p">(</span><span class="n">mapAnnotation</span><span class="o">.</span><span class="n">_obj</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x22efc49c400&gt;
-</pre></div>
 </div>
-<img alt="../../_images/3e3a30e8a876efe879657a03167d0c0f594e2253c36f855e51bad82ed82d8db0.png" src="../../_images/3e3a30e8a876efe879657a03167d0c0f594e2253c36f855e51bad82ed82d8db0.png" />
-</div>
-</div>
+<p>There’s your result:</p>
+<p><img alt="kv-pairs" src="../../_images/kv_pairs_edited.PNG" /></p>
 </section>
 </section>
 
@@ -478,7 +508,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/read_and_write"
+            path: "./notebooks/metadata"
         },
         predefinedOutput: true
     }
@@ -496,20 +526,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../index.html"
+       href="Readme.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Omero-tools</p>
+        <p class="prev-next-title">Metadata</p>
       </div>
     </a>
     <a class="right-next"
-       href="../metadata/Readme.html"
+       href="../../instructions/transfer_dataset.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Metadata</p>
+        <p class="prev-next-title">How to transfer a dataset between two omero instances</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -529,8 +559,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upoading-data-to-omero">Upoading data to OMERO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data-from-omero">Reading data from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-key-value-pairs">Adding key value pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-key-value-pair-from-omero">Reading a key-value pair from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-key-value-pairs">Edit key-value pairs</a></li>
 </ul>
   </nav></div>
 
