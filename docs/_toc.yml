@@ -6,6 +6,7 @@ chapters:
   - file: notebooks/metadata/Readme
     sections:
     - file: notebooks/metadata/key_value_pairs
+    - file: notebooks/metadata/setting_pixel_sizes
   - file: instructions/transfer_dataset
   - file: notebooks/synchronize_tags
   
