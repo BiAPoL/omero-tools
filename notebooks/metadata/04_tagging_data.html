@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reading, writing and editing key-value pairs &#8212; OMERO Tools</title>
+    <title>How to tag and retrieve tags from data &#8212; OMERO Tools</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/metadata/01_key_value_pairs';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/metadata/04_tagging_data';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Setting pixel sizes of an image" href="02_setting_pixel_sizes.html" />
-    <link rel="prev" title="Working with Metadata" href="Readme.html" />
+    <link rel="next" title="Synchronize tags across groups" href="05_synchronize_tags.html" />
+    <link rel="prev" title="Setting channel names" href="03_setting_channel_names.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,10 +182,10 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../read_and_write/read_and_write.html">Read and write data to OMERO from Python</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Readme.html">Working with Metadata</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Reading, writing and editing key-value pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_key_value_pairs.html">Reading, writing and editing key-value pairs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_setting_pixel_sizes.html">Setting pixel sizes of an image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_setting_channel_names.html">Setting  channel names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_tagging_data.html">How to tag and retrieve tags from data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to tag and retrieve tags from data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_synchronize_tags.html">Synchronize tags across groups</a></li>
 
 </ul>
@@ -245,7 +245,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/metadata/01_key_value_pairs.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/metadata/04_tagging_data.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -329,7 +329,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reading, writing and editing key-value pairs</h1>
+    <h1>How to tag and retrieve tags from data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -339,9 +339,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-key-value-pairs">Adding key value pairs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-key-value-pair-from-omero">Reading a key-value pair from OMERO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-key-value-pairs">Edit key-value pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagging-data">Tagging data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-tags-from-omero">Reading tags from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-tag-to-data">Adding a tag to data</a></li>
 </ul>
             </nav>
         </div>
@@ -353,13 +353,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="reading-writing-and-editing-key-value-pairs">
-<span id="omero-tools-key-value-pairs"></span><h1>Reading, writing and editing key-value pairs<a class="headerlink" href="#reading-writing-and-editing-key-value-pairs" title="Link to this heading">#</a></h1>
-<p>Key value pairs are a key (pun intended) part of annotating data in OMERO in a very flexible way. In essence, they provide a way of adding Python dictionaries to an image, a project or a dataset - and a Python dictionary is fit for data of virtually any form. Here are a few ways of interacting with data in this form through Python.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="how-to-tag-and-retrieve-tags-from-data">
+<h1>How to tag and retrieve tags from data<a class="headerlink" href="#how-to-tag-and-retrieve-tags-from-data" title="Link to this heading">#</a></h1>
+<p>Another key concept of organizing data on OMERO (besides <a class="reference internal" href="01_key_value_pairs.html#omero-tools-key-value-pairs"><span class="std std-ref">key-value pairs</span></a>) is given by <em>tags</em>. Can be used to group data in a more flexible way than the hierarchy of projects, datasets and images. For a more in-depth explanation of some of the underlying concepts, see <a class="reference external" href="https://zenodo.org/records/8323588">these excellent training materials</a> regarding OMERO in general.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ezomero</span>
-<span class="kn">from</span> <span class="nn">omero.rtypes</span> <span class="kn">import</span> <span class="n">rstring</span><span class="p">,</span> <span class="n">rlong</span>
 </pre></div>
 </div>
 </div>
@@ -377,124 +376,79 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="adding-key-value-pairs">
-<h2>Adding key value pairs<a class="headerlink" href="#adding-key-value-pairs" title="Link to this heading">#</a></h2>
-<p>Let’s add some kv pairs from a Python dictionary. In the OMERO terminology, key value pairs are referred to as “map annotations”, so that’s the function we’ll need to use:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s1">&#39;Patient name&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_id</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_map_annotation</span><span class="p">(</span>
-    <span class="n">conn</span><span class="p">,</span>
-    <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span>
-    <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">,</span>
-    <span class="n">kv_dict</span><span class="o">=</span><span class="n">kv_pairs</span><span class="p">,</span>
-    <span class="n">ns</span><span class="o">=</span><span class="s1">&#39;openmicroscopy.org/omero/client/mapAnnotation&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object group 3
-8257
-</pre></div>
-</div>
-</div>
-</div>
-<p>If you check out your image on OMERo, you see the posted key-value pairs:</p>
-<p><img alt="kv-pairs" src="../../_images/kv_pairs.PNG" /></p>
-<p>Let’s quickly talk about the elephant the room: What exactly is the <code class="docutils literal notranslate"><span class="pre">ns</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">post_map_annotation</span></code> function? It stands for “namespace” and is a way of grouping key-value pairs. If you have a lot of key-value pairs, you might want to group them into different namespaces to keep things organized. If you don’t care about namespaces, you can just use an empty string. The default namespace is <code class="docutils literal notranslate"><span class="pre">'openmicroscopy.org/omero/client/mapAnnotation'</span></code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you set the namespace to a value different from ‘<a class="reference external" href="http://openmicroscopy.org/omero/client/mapAnnotation">openmicroscopy.org/omero/client/mapAnnotation</a>’, you will not be able to edit the key-value pairs in the OMERO web interface.</p>
-</div>
+<section id="tagging-data">
+<h2>Tagging data<a class="headerlink" href="#tagging-data" title="Link to this heading">#</a></h2>
+<p>The easiest and most straightforward way to tag your data is arguably to simply do this through the web interface of your OMERO servers. Omero extensions such as the excellent <a class="reference external" href="https://pypi.org/project/omero-autotag/">autotag</a> extension make setting meaningful tags on your data a breeze. The question then becomes - how do you retrieve tags that have already been added to your data?</p>
 </section>
-<section id="reading-a-key-value-pair-from-omero">
-<h2>Reading a key-value pair from OMERO<a class="headerlink" href="#reading-a-key-value-pair-from-omero" title="Link to this heading">#</a></h2>
-<p>Let’s now do it the other way round: read a key-value pair from OMERO. For this, we need a two-step process: We first need to retrieve all map annotations of a single image (there can be more than one) and then we can access the key-value pairs of the individual annotations.</p>
+<section id="reading-tags-from-omero">
+<h2>Reading tags from OMERO<a class="headerlink" href="#reading-tags-from-omero" title="Link to this heading">#</a></h2>
+<p>Let’s use <a class="reference external" href="https://thejacksonlaboratory.github.io/ezomero/">ezomero</a> again to retrieve tags that have been added to an image. This will return a list of tags (indicated by their respective ids) that have been added to the image. This is an important concept to grasp: Just like an image, a tag is an object in the OMERO database, and it has a unique identifier (id). This id is what is returned when you retrieve tags from an image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_ids</span><span class="p">)</span><span class="n">a</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tag_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_tag_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag_ids</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8257]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1088]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s look at the first (and only) map annotation we just retrieved:</p>
+<p>If we want to see the “value” of the tag, we can use the <code class="docutils literal notranslate"><span class="pre">get_tag</span></code> function to introspect the ids we just retrieved:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">map_ann_id</span><span class="o">=</span><span class="n">map_annotation_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">kv_pairs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ezomero</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tag_id</span><span class="o">=</span><span class="n">tag_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Age&#39;: &#39;35&#39;, &#39;Patient name&#39;: &#39;John Doe&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Fluorescence&#39;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="edit-key-value-pairs">
-<h2>Edit key-value pairs<a class="headerlink" href="#edit-key-value-pairs" title="Link to this heading">#</a></h2>
-<p>Lastly, let’s say we don’t want to read or write a kv pairs, but we really just want to edit a particular entry of a key-value dictionary. We start just as before by getting the map_annotation_id of the particular map annotation we are interested in.</p>
+<section id="adding-a-tag-to-data">
+<h2>Adding a tag to data<a class="headerlink" href="#adding-a-tag-to-data" title="Link to this heading">#</a></h2>
+<p>Adding a tag to an image is a little less straightforward. For once, it makes more sense to create and organize the tags through the web interface. The <a class="reference internal" href="05_synchronize_tags.html#omero-tools-synchronize-tags"><span class="std std-ref">following tutorial</span></a> introduces a way to set tags and tag groups from a yaml file, but this is a bit more complicated. For simplicity, let’s assume we already created some tags and we know their ids from the web interface:</p>
+<p><img alt="new tag list" src="../../_images/new_tag0.PNG" />
+<img alt="new tag" src="../../_images/new_tag1.PNG" /></p>
+<p>To add this newly created tag to our image, we need to first retrieve both the tag and the image objects from the remote server:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_annotation_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_map_annotation_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">map_annotation_ids</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tag_object</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="s1">&#39;Annotation&#39;</span><span class="p">,</span> <span class="mi">8354</span><span class="p">)</span>
+<span class="n">image_object</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the next step, we link the tag to the image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_object</span><span class="o">.</span><span class="n">linkAnnotation</span><span class="p">(</span><span class="n">tag_object</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check whether this worked:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tag_ids</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_tag_ids</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">object_id</span><span class="o">=</span><span class="mi">330</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">tag_id</span> <span class="ow">in</span> <span class="n">tag_ids</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ezomero</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tag_id</span><span class="o">=</span><span class="n">tag_id</span><span class="p">),</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;(Tag id: </span><span class="si">{</span><span class="n">tag_id</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8257]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fluorescence   (Tag id: 1088)
+Raw data   (Tag id: 8354)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now we retrieve the map annotation as an omero object:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapAnnotation</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MapAnnotation&#39;</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="n">map_annotation_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>This is the new dictoinary we want to save.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Setting a key-value pair like this will overwrite the entire map annotation. If you want to keep the existing key-value pairs, you will need to read the existing key-value pairs first and then update or append the dictionary.</p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kv_pairs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;36&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;Patient name&#39;</span><span class="p">,</span> <span class="s1">&#39;John Doe2&#39;</span><span class="p">)</span>
-    <span class="p">]</span>  <span class="c1"># Note: the value should be a string - no integers allowed here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the updated annotation</span>
-<span class="n">mapAnnotation</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">kv_pairs</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span><span class="o">.</span><span class="n">saveObject</span><span class="p">(</span><span class="n">mapAnnotation</span><span class="o">.</span><span class="n">_obj</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>There’s your result:</p>
-<p><img alt="kv-pairs" src="../../_images/kv_pairs_edited.PNG" /></p>
 </section>
 </section>
 
@@ -529,20 +483,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Readme.html"
+       href="03_setting_channel_names.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Working with Metadata</p>
+        <p class="prev-next-title">Setting  channel names</p>
       </div>
     </a>
     <a class="right-next"
-       href="02_setting_pixel_sizes.html"
+       href="05_synchronize_tags.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setting pixel sizes of an image</p>
+        <p class="prev-next-title">Synchronize tags across groups</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -562,9 +516,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-key-value-pairs">Adding key value pairs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-key-value-pair-from-omero">Reading a key-value pair from OMERO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-key-value-pairs">Edit key-value pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagging-data">Tagging data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-tags-from-omero">Reading tags from OMERO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-tag-to-data">Adding a tag to data</a></li>
 </ul>
   </nav></div>
 
