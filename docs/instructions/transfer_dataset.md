@@ -1,10 +1,10 @@
 (OMERO.transfer_dataset)=
 # How to transfer a dataset between two omero instances
 
-It is a common task to transfer a dataset between two omero instances. This can be done using the OMERO API. The following steps will guide you through the process. Consider the following example: The dataset with id `dataset_id` is to be transferred from the source omero instance to the target omero instance.
+It is a common task to transfer a dataset between two omero instances. This can be done using the OMERO API from the command line. The following steps will guide you through the process. Consider the following example: The dataset with id `dataset_id` is to be transferred from the source omero instance to the target omero instance.
 
-Source omero instance: `172.26.122.141` (our test instance)
-Target omore instance: `omero-int.biotec.tu-dresden.de`
+Source omero instance: `source_hostname` (our test instance)
+Target omero instance: `omero-int.biotec.tu-dresden.de`
 
 ## Preprequisites
 
@@ -18,10 +18,10 @@ pip install omero-cli transfer
 
 ## Transfer the data
 
-To transfer the data, first log onto the source omero instance. This prompts you to enter your username and password.
+To transfer the data, first log onto the source omero instance. This prompts you to enter your username and password. Of course, replace the `host_name` with the host name of your omero server.
 
 ```bash
-omero login 172.26.122.141 --group <group_name>
+omero login host_adress --group <group_name>
 ```
 
 Next, create a local copy of the specified dataset at a specified destination. The dataset will be named according to the path you provide.
@@ -30,7 +30,7 @@ Next, create a local copy of the specified dataset at a specified destination. T
 omero transfer pack Dataset:<dataset_id> path/to/a/destination.tar
 ```	
 
-Now, log onto the target omero instance.
+Now, log onto the target omero instance - in this case, this is `omero-int.biotec.tu-dresden.de`. Again, replace the `group_name` with the name of the group you want to upload the dataset to.
 
 ```bash
 omero login omero-int.biotec.tu-dresden.de --group <group_name>
@@ -44,5 +44,10 @@ omero transfer unpack path/to/a/destination.tar
 
 And that's it. 
 
-*Note*: All of these steps can take some time, depending on the size of the dataset. Make sure to do this on a machine that has access to a high-speed internet connection.
-*Note2*: During the upload, you will see the images being uploaded under arbitrary names. The correct names, annotations, etc. will be restored once the upload is complete.
+```{note}
+All of these steps can take some time, depending on the size of the dataset. Make sure to do this on a machine that has access to a high-speed internet connection.
+```
+
+```{note}
+During the upload, you will see the images being uploaded under arbitrary names. The correct names, annotations, etc. will be restored once the upload is complete.
+```
