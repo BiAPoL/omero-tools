@@ -8,6 +8,6 @@ chapters:
     - file: notebooks/metadata/01_key_value_pairs
     - file: notebooks/metadata/02_setting_pixel_sizes
     - file: notebooks/metadata/03_setting_channel_names
-    - file: notebooks/metadata/04_synchronize_tags
+    - file: notebooks/metadata/05_synchronize_tags
   - file: instructions/transfer_dataset
   
