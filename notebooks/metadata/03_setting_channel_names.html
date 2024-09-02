@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Working with metadata from python &#8212; OMERO Tools</title>
+    <title>Setting channel names &#8212; OMERO Tools</title>
   
   
   
@@ -57,9 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/tags_and_kv_pairs/working_with_tags_and_kv_pairs';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/metadata/03_setting_channel_names';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to transfer a dataset between two omero instances" href="../../instructions/transfer_dataset.html" />
+    <link rel="prev" title="Setting pixel sizes of an image" href="02_setting_pixel_sizes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,12 +179,12 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../read_and_write/read_and_write.html">Read and write data to OMERO from Python</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../metadata/Readme.html">Working with Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../metadata/01_key_value_pairs.html">Reading, writing and editing key-value pairs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata/02_setting_pixel_sizes.html">Setting pixel sizes of an image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../metadata/03_setting_channel_names.html">Setting  channel names</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Readme.html">Working with Metadata</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_key_value_pairs.html">Reading, writing and editing key-value pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_setting_pixel_sizes.html">Setting pixel sizes of an image</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Setting  channel names</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../instructions/transfer_dataset.html">How to transfer a dataset between two omero instances</a></li>
@@ -244,7 +244,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/tags_and_kv_pairs/working_with_tags_and_kv_pairs.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/metadata/03_setting_channel_names.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -315,9 +315,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -328,19 +326,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Working with metadata from python</h1>
+    <h1>Setting  channel names</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-value-pairs">Key-value pairs</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -350,21 +340,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="working-with-metadata-from-python">
-<h1>Working with metadata from python<a class="headerlink" href="#working-with-metadata-from-python" title="Link to this heading">#</a></h1>
-<p>An important aspect of OMERO - maybe <em>the</em> most important aspect of OMERO - is working with metadata. OMERO provides two essential ways of enriching your  data with metadata: Tag annotations and key-value pairs. In this notebook you will learn some essential ways of working with these  from python. Topics covered in this notebook include:</p>
-<ul class="simple">
-<li><p>How to add key-value pairs to an image</p></li>
-<li><p>How to add tags to an image</p></li>
-<li><p>How to set the pixel size of an image</p></li>
-<li><p>How to set the channel name of an image</p></li>
-</ul>
-<p>Recommended previous read: <a class="reference internal" href="../read_and_write/read_and_write.html#omero-io-read-and-write"><span class="std std-ref">How to upload and download data from OMERO</span></a></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="setting-channel-names">
+<h1>Setting  channel names<a class="headerlink" href="#setting-channel-names" title="Link to this heading">#</a></h1>
+<p>The naming of channels of multicolor images can be a bit ambiguous if not done properly directly from the start of the acquisition. Also, a microscope may name a channel simply after the name of the excitation laser wavelength or the emission filter - because the micrscope is unaware of the particular fluorophore or staining that is being used. In that situation, you can change the channel name to something more meaningful to you.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ezomero</span>
 <span class="kn">import</span> <span class="nn">omero</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -372,7 +354,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;omero-int.biotec.tu-dresden.de&#39;</span>
-<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;johamuel&#39;</span>  <span class="c1"># replace this with your username</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>  <span class="c1"># replace this with your username</span>
 <span class="n">secure</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">port</span> <span class="o">=</span> <span class="mi">4064</span>
 <span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
@@ -382,103 +364,62 @@ document.write(`
 </div>
 </div>
 </div>
-<p>For the sake of this tutorial, we shall quickly upload some random data:</p>
+<p>First, let’s retrieve the current metadata of our sample image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
-<span class="n">image_id</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;tczyx&#39;</span><span class="p">,</span> <span class="n">image_name</span><span class="o">=</span><span class="s1">&#39;random_image&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image ID: &#39;</span><span class="p">,</span> <span class="n">image_id</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Channel labels: &#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">getChannelLabels</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Using this function to save images to OMERO is not recommended when `transfer=ln_s` is the primary mechanism for data import on your OMERO instance. Please consult with your OMERO administrator.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image ID:  8755
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Channel labels:  [&#39;0&#39;, &#39;1&#39;]
 </pre></div>
 </div>
 </div>
 </div>
-<section id="key-value-pairs">
-<h2>Key-value pairs<a class="headerlink" href="#key-value-pairs" title="Link to this heading">#</a></h2>
-<p>A key thing (pun intended) we would like to do, is to add some <a class="reference external" href="https://docs.openmicroscopy.org/omero/5.1.4/developers/Model/KeyValuePairs.html">key-value pairs</a> to the image. These give us the opportunity to provide metadata to our image data in a very flexible way. On the Python side, a key-value pair is simply a dictionary, which we can create like this:</p>
+<p>Our channels are currently named <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>, which is obviously not very informative. We can change the channel names to something more meaningful. We create a dictionary for some new channel names.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Per OMERO convention, the keys of the dictionary have to be numbers counting up from 1 to the number of channels in the image.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key_value_pairs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Owner&#39;</span><span class="p">:</span> <span class="s1">&#39;Johannes&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="s1">&#39;20230620&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_channel_names</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;DAPI&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;GFP&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Suppose we want to add some kv-pairs to the above-uploaded image, we can do it like this. The arguments are relatively straightforward, except for the <code class="docutils literal notranslate"><span class="pre">ns</span></code> argument, which is short for an <a class="reference external" href="https://docs.openmicroscopy.org/omero/5.6.4/developers/Model/StructuredAnnotations.html#names-and-namespaces">omero namespace</a>. The concept of the <code class="docutils literal notranslate"><span class="pre">namespace</span></code> ensure a few things:</p>
-<ul class="simple">
-<li><p><strong>Uniqueness</strong>: Namespaces help avoid conflicts by making sure that annotations from different sources or with different purposes don’t get mixed up or overwrite each other.</p></li>
-<li><p><strong>Context</strong>: They provide a context for the data, making it clear what the data represents and how it should be interpreted.</p></li>
-<li><p><strong>Scalability</strong>: As your OMERO server grows with more data and more users, namespaces help keep annotations organized and manageable.</p></li>
-</ul>
-<p>Using a namespace has a very practical effect:</p>
+<p>Now we can pass this dictionary to the remote image object to update the channel names. Note that the <code class="docutils literal notranslate"><span class="pre">ids</span></code> keyword requires <em>a list of image ids</em> and not a single image id.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ezomero</span><span class="o">.</span><span class="n">post_map_annotation</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="mi">8755</span><span class="p">,</span> <span class="n">key_value_pairs</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="s2">&quot;openmicroscopy.org/omero/client/mapAnnotation&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">setChannelNames</span><span class="p">(</span><span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="n">metadata</span><span class="o">.</span><span class="n">getId</span><span class="p">()],</span> <span class="n">nameDict</span><span class="o">=</span><span class="n">new_channel_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object group 3
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4030
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;imageCount&#39;: 1, &#39;updateCount&#39;: 1}
 </pre></div>
 </div>
 </div>
 </div>
-<p>The next thing we may want to do is to add a tag to our data. Again, we can use ezomero for this job. To do this, we first check whether a tag of a given name already exists in the space of available tags. If so, we can retrieve its id and use it to tag our data. If not, we can create a new tag and use its id to tag our data.</p>
+<p>Let’s check for the information of the image again to see if the channel names have been updated.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omero.gateway</span> <span class="kn">import</span> <span class="n">TagAnnotationWrapper</span><span class="p">,</span> <span class="n">TagAnnotationI</span>
-<span class="kn">from</span> <span class="nn">omero.rtypes</span> <span class="kn">import</span> <span class="n">rstring</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tag_name</span> <span class="o">=</span> <span class="s2">&quot;SampleData&quot;</span>  <span class="c1"># Replace with your desired tag name</span>
-<span class="n">tags</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObjects</span><span class="p">(</span><span class="s2">&quot;TagAnnotation&quot;</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;textValue&quot;</span><span class="p">:</span> <span class="n">tag_name</span><span class="p">})</span>
-
-<span class="n">tag_id</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
-    <span class="n">tag_id</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span>
-    <span class="k">break</span>
-
-<span class="c1"># If the tag does not exist, create it</span>
-<span class="c1"># If the tag does not exist, create it</span>
-<span class="k">if</span> <span class="n">tag</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">tag</span> <span class="o">=</span> <span class="n">TagAnnotationWrapper</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
-    <span class="n">tag</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">rstring</span><span class="p">(</span><span class="n">tag_name</span><span class="p">))</span>
-    <span class="n">tag</span><span class="o">.</span><span class="n">setDescription</span><span class="p">(</span><span class="n">rstring</span><span class="p">(</span><span class="s2">&quot;A tag for sample data&quot;</span><span class="p">))</span>
-    <span class="n">tag</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image_id</span><span class="o">=</span><span class="mi">330</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Channel labels: &#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">getChannelLabels</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;TagAnnotationWrapper id=4024&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Channel labels:  [&#39;DAPI&#39;, &#39;GFP&#39;]
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_object</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">,</span> <span class="n">image_id</span><span class="p">)</span>
-<span class="n">image_object</span><span class="o">.</span><span class="n">linkAnnotation</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -494,7 +435,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/tags_and_kv_pairs"
+            path: "./notebooks/metadata"
         },
         predefinedOutput: true
     }
@@ -511,27 +452,30 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="02_setting_pixel_sizes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Setting pixel sizes of an image</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../instructions/transfer_dataset.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">How to transfer a dataset between two omero instances</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-value-pairs">Key-value pairs</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
