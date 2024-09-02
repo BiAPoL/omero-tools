@@ -352,9 +352,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="how-to-transfer-a-dataset-between-two-omero-instances">
 <span id="omero-transfer-dataset"></span><h1>How to transfer a dataset between two omero instances<a class="headerlink" href="#how-to-transfer-a-dataset-between-two-omero-instances" title="Link to this heading">#</a></h1>
-<p>It is a common task to transfer a dataset between two omero instances. This can be done using the OMERO API. The following steps will guide you through the process. Consider the following example: The dataset with id <code class="docutils literal notranslate"><span class="pre">dataset_id</span></code> is to be transferred from the source omero instance to the target omero instance.</p>
-<p>Source omero instance: <code class="docutils literal notranslate"><span class="pre">172.26.122.141</span></code> (our test instance)
-Target omore instance: <code class="docutils literal notranslate"><span class="pre">omero-int.biotec.tu-dresden.de</span></code></p>
+<p>It is a common task to transfer a dataset between two omero instances. This can be done using the OMERO API from the command line. The following steps will guide you through the process. Consider the following example: The dataset with id <code class="docutils literal notranslate"><span class="pre">dataset_id</span></code> is to be transferred from the source omero instance to the target omero instance.</p>
+<p>Source omero instance: <code class="docutils literal notranslate"><span class="pre">source_hostname</span></code> (our test instance)
+Target omero instance: <code class="docutils literal notranslate"><span class="pre">omero-int.biotec.tu-dresden.de</span></code></p>
 <section id="preprequisites">
 <h2>Preprequisites<a class="headerlink" href="#preprequisites" title="Link to this heading">#</a></h2>
 <p>Install the necessary packages - e.g., <a class="reference external" href="https://github.com/ome/omero-cli-transfer">omero-cli-transfer</a> - on your local machine.</p>
@@ -365,15 +365,15 @@ Target omore instance: <code class="docutils literal notranslate"><span class="p
 </section>
 <section id="transfer-the-data">
 <h2>Transfer the data<a class="headerlink" href="#transfer-the-data" title="Link to this heading">#</a></h2>
-<p>To transfer the data, first log onto the source omero instance. This prompts you to enter your username and password.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>login<span class="w"> </span><span class="m">172</span>.26.122.141<span class="w"> </span>--group<span class="w"> </span>&lt;group_name&gt;
+<p>To transfer the data, first log onto the source omero instance. This prompts you to enter your username and password. Of course, replace the <code class="docutils literal notranslate"><span class="pre">host_name</span></code> with the host name of your omero server.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>login<span class="w"> </span>host_adress<span class="w"> </span>--group<span class="w"> </span>&lt;group_name&gt;
 </pre></div>
 </div>
 <p>Next, create a local copy of the specified dataset at a specified destination. The dataset will be named according to the path you provide.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>transfer<span class="w"> </span>pack<span class="w"> </span>Dataset:&lt;dataset_id&gt;<span class="w"> </span>path/to/a/destination.tar
 </pre></div>
 </div>
-<p>Now, log onto the target omero instance.</p>
+<p>Now, log onto the target omero instance - in this case, this is <code class="docutils literal notranslate"><span class="pre">omero-int.biotec.tu-dresden.de</span></code>. Again, replace the <code class="docutils literal notranslate"><span class="pre">group_name</span></code> with the name of the group you want to upload the dataset to.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>login<span class="w"> </span>omero-int.biotec.tu-dresden.de<span class="w"> </span>--group<span class="w"> </span>&lt;group_name&gt;
 </pre></div>
 </div>
@@ -382,8 +382,14 @@ Target omore instance: <code class="docutils literal notranslate"><span class="p
 </pre></div>
 </div>
 <p>And that’s it.</p>
-<p><em>Note</em>: All of these steps can take some time, depending on the size of the dataset. Make sure to do this on a machine that has access to a high-speed internet connection.
-<em>Note2</em>: During the upload, you will see the images being uploaded under arbitrary names. The correct names, annotations, etc. will be restored once the upload is complete.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of these steps can take some time, depending on the size of the dataset. Make sure to do this on a machine that has access to a high-speed internet connection.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During the upload, you will see the images being uploaded under arbitrary names. The correct names, annotations, etc. will be restored once the upload is complete.</p>
+</div>
 </section>
 </section>
 
