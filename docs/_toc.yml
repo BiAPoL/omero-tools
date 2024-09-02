@@ -5,8 +5,9 @@ chapters:
   - file: notebooks/read_and_write/read_and_write
   - file: notebooks/metadata/Readme
     sections:
-    - file: notebooks/metadata/key_value_pairs
-    - file: notebooks/metadata/setting_pixel_sizes
+    - file: notebooks/metadata/01_key_value_pairs
+    - file: notebooks/metadata/02_setting_pixel_sizes
+    - file: notebooks/metadata/03_setting_channel_names
   - file: instructions/transfer_dataset
   - file: notebooks/synchronize_tags
   
