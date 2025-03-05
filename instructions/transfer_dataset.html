@@ -374,6 +374,10 @@ Target omero instance: <code class="docutils literal notranslate"><span class="p
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>transfer<span class="w"> </span>pack<span class="w"> </span>Dataset:&lt;dataset_id&gt;<span class="w"> </span>path/to/a/destination.tar
 </pre></div>
 </div>
+<p>Conversely, if you want to transfer not only a single dataset but, say, an entire project, the syntax would be similar. For more in-depth documentation, please see the <a class="reference external" href="https://github.com/ome/omero-cli-transfer">omero-cli-transfer docs</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>transfer<span class="w"> </span>pack<span class="w"> </span>Project:&lt;project_id&gt;<span class="w"> </span>path/to/a/destination.tar
+</pre></div>
+</div>
 <p>Now, log onto the target omero instance - in this case, this is <code class="docutils literal notranslate"><span class="pre">omero-int.biotec.tu-dresden.de</span></code>. Again, replace the <code class="docutils literal notranslate"><span class="pre">group_name</span></code> with the name of the group you want to upload the dataset to.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>omero<span class="w"> </span>login<span class="w"> </span>omero-int.biotec.tu-dresden.de<span class="w"> </span>--group<span class="w"> </span>&lt;group_name&gt;
 </pre></div>

@@ -28,7 +28,13 @@ Next, create a local copy of the specified dataset at a specified destination. T
 
 ```bash
 omero transfer pack Dataset:<dataset_id> path/to/a/destination.tar
-```	
+```
+
+Conversely, if you want to transfer not only a single dataset but, say, an entire project, the syntax would be similar. For more in-depth documentation, please see the [omero-cli-transfer docs](https://github.com/ome/omero-cli-transfer).
+
+```bash
+omero transfer pack Project:<project_id> path/to/a/destination.tar
+```
 
 Now, log onto the target omero instance - in this case, this is `omero-int.biotec.tu-dresden.de`. Again, replace the `group_name` with the name of the group you want to upload the dataset to.
 
