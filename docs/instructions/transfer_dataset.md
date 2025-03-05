@@ -11,7 +11,7 @@ Target omero instance: `omero-int.biotec.tu-dresden.de`
 Install the necessary packages - e.g., [omero-cli-transfer](https://github.com/ome/omero-cli-transfer) - on your local machine.
 
 ```bash
-pip install omero-cli transfer
+pip install omero-cli-transfer
 ```
 
 ... that's it! Now you can start the transfer process.
