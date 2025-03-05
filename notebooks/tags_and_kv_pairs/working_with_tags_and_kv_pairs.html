@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -363,9 +363,9 @@ document.write(`
 <p>Recommended previous read: <a class="reference internal" href="../read_and_write/read_and_write.html#omero-io-read-and-write"><span class="std std-ref">How to upload and download data from OMERO</span></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ezomero</span>
-<span class="kn">import</span> <span class="nn">omero</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ezomero</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">omero</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -439,8 +439,8 @@ document.write(`
 <p>The next thing we may want to do is to add a tag to our data. Again, we can use ezomero for this job. To do this, we first check whether a tag of a given name already exists in the space of available tags. If so, we can retrieve its id and use it to tag our data. If not, we can create a new tag and use its id to tag our data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omero.gateway</span> <span class="kn">import</span> <span class="n">TagAnnotationWrapper</span><span class="p">,</span> <span class="n">TagAnnotationI</span>
-<span class="kn">from</span> <span class="nn">omero.rtypes</span> <span class="kn">import</span> <span class="n">rstring</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">omero.gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">TagAnnotationWrapper</span><span class="p">,</span> <span class="n">TagAnnotationI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omero.rtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">rstring</span>
 </pre></div>
 </div>
 </div>

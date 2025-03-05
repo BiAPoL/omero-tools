@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -346,10 +346,10 @@ document.write(`
 <p>A key part of the metadata are the pixel/voxel sizes of image data. When upload processed image data to OMERO, they are by default not part of the uploaded data but a key part you wish to add to your data. Following up <a class="reference external" href="https://forum.image.sc/t/specifying-pixel-size-using-python-bridge-for-omero-ezomero/81729/2">this dicsussion</a> on <a class="reference external" href="http://image.sc">image.sc</a>, here’s how you can do it using <a class="reference external" href="https://pypi.org/project/omero-py/">omero-py</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">omero</span>
-<span class="kn">import</span> <span class="nn">ezomero</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omero</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ezomero</span>
 
-<span class="kn">from</span> <span class="nn">omero.model.enums</span> <span class="kn">import</span> <span class="n">UnitsLength</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omero.model.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnitsLength</span>
 </pre></div>
 </div>
 </div>
