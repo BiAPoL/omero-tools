@@ -15,6 +15,7 @@ chapters:
     - file: notebooks/ROIs/01_Saving_ROI_2D
     - file: notebooks/ROIs/02_Saving_ROI_3D
     - file: notebooks/ROIs/03_Downloading_ROIs_2D
+    - file: notebooks/ROIs/04_Downloading_ROIs_3D
   
   - file: instructions/transfer_dataset
   
