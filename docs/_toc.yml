@@ -12,8 +12,9 @@ chapters:
     - file: notebooks/metadata/05_synchronize_tags
   - file: notebooks/ROIs/Readme
     sections:
-    - file: notebooks/ROIs/01_Saving_ROIs_2D
-    - file: notebooks/ROIs/02_Downloading_ROIs_2D
+    - file: notebooks/ROIs/01_Saving_ROI_2D
+    - file: notebooks/ROIs/02_Saving_ROI_3D
+    - file: notebooks/ROIs/03_Downloading_ROIs_2D
   
   - file: instructions/transfer_dataset
   
