@@ -1,3 +1,3 @@
-# Working with ROIs
+# ROIs
 
 ROIs ([[region of interest](https://en.wikipedia.org/wiki/Region_of_interest)]) are OMERO's way of working with segmentation data. They are typically comprised of single or multiple polygons, unlike labels images, which many are probably more familiar with in the Python context. They come with the advantage of being very lightweight to use - but they need to converted into labels data to work with many other image analysis tools, such as scikit-image, for instance. This section explores the upload, download and conversion of ROIs from and to OMERO.
