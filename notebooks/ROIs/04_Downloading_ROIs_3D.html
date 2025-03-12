@@ -359,8 +359,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="downloading-rois-3d">
-<h1>Downloading ROIs (3D)<a class="headerlink" href="#downloading-rois-3d" title="Link to this heading">#</a></h1>
+<span id="rois-loading-3d"></span><h1>Downloading ROIs (3D)<a class="headerlink" href="#downloading-rois-3d" title="Link to this heading">#</a></h1>
 <p>Following up the notebooks about <a class="reference internal" href="02_Saving_ROI_3D.html#rois-saving-3d"><span class="std std-ref">uploading nD segmentations</span></a> as ROIs to OMERO and the previous notebook on <a class="reference internal" href="03_Downloading_ROIs_2D.html#rois-loading-2d"><span class="std std-ref">restoring segmentations from uploaded ROIs</span></a>, let’s look at how we can accomplish the same with nD-segmentations.</p>
+<p>For this tutorial, you’ll have to install napari, too:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>install<span class="w"> </span>napari<span class="w"> </span>pyqt
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">omero.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Shape</span>
