@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Upload ROIs (2D) &#8212; OMERO Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ROIs/01_Saving_ROI_2D';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Upload ROIs (3D)" href="02_Saving_ROI_3D.html" />
+    <link rel="prev" title="ROIs" href="Readme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/biapol_logo.png" class="logo__image only-light" alt="OMERO Tools - Home"/>
+    <script>document.write(`<img src="../../_static/biapol_logo.png" class="logo__image only-dark" alt="OMERO Tools - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Omero-tools
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../read_and_write/read_and_write.html">Read and write data to OMERO from Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../metadata/Readme.html">Working with Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../metadata/01_key_value_pairs.html">Reading, writing and editing key-value pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata/02_setting_pixel_sizes.html">Setting pixel sizes of an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata/03_setting_channel_names.html">Setting  channel names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata/04_tagging_data.html">How to tag and retrieve tags from data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata/05_synchronize_tags.html">Synchronize tags across groups</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Readme.html">ROIs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Upload ROIs (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Saving_ROI_3D.html">Upload ROIs (3D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Downloading_ROIs_2D.html">Downloading ROIs (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Downloading_ROIs_3D.html">Downloading ROIs (3D)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/transfer_dataset.html">How to transfer a dataset between two omero instances</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/ROIs/01_Saving_ROI_2D.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Upload ROIs (2D)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uploading-a-2d-binary-image">Uploading a 2D binary image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uploading-a-2d-labels-image">Uploading a 2D labels image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-ezomero">Using ezomero</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="upload-rois-2d">
+<span id="rois-saving-2d"></span><h1>Upload ROIs (2D)<a class="headerlink" href="#upload-rois-2d" title="Link to this heading">#</a></h1>
+<p>Let’s first look at how masks for 2d binary and labels images are created and uploaded to OMERO. Credit for the code goes to Tally Lambert for their work in the <a class="reference external" href="https://github.com/tlambert03/napari-omero">napari-omero</a> repo, from which a lot of this code is inspired. In the first part, we will use <a class="reference external" href="https://github.com/ome/omero-py">omero-py</a> for a bit tighter control of what we are doing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ezomero</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">omero_rois</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omero.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">RoiI</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">filters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As always, we begin by connecting to the OMERO server:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;your-user&#39;</span>
+<span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;your-host&#39;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">4064</span>
+<span class="n">secure</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="n">secure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We may want to save to different kinds of segmentation results: Binary images or label images. Binary images contain only <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>, whereas in label images, connect <code class="docutils literal notranslate"><span class="pre">1</span></code>s are fused into objects which share a common, unique integer value as their identifier. Let’s cr44eate some data like this for testing purposes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">human_mitosis</span><span class="p">()</span>
+<span class="n">binary</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;</span> <span class="n">filters</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first upload the image to later attach some segmentations to it. Note that our image is a 2d image, but OMERO always expects 5D data -so we need to add some empty dimensions prior to upload. That’s what this formulation (<code class="docutils literal notranslate"><span class="pre">image[None,</span> <span class="pre">None,</span> <span class="pre">None,:]</span></code>) does to the image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we first need to upload the image:</span>
+<span class="n">image_id</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,:],</span> <span class="n">image_name</span><span class="o">=</span><span class="s1">&#39;human_mitosis&#39;</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;tczyx&#39;</span><span class="p">)</span>
+<span class="n">image_wrapper</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">image_id</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s1">&#39;tczyx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Using this function to save images to OMERO is not recommended when `transfer=ln_s` is the primary mechanism for data import on your OMERO instance. Please consult with your OMERO administrator.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,:]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1, 1, 512, 512)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Depending on whether we want to upload the segmentation as a binary image or as separate labels we need to change the upload a bit. Either way, we first create an empty ROI:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">updateService</span> <span class="o">=</span> <span class="n">image_wrapper</span><span class="o">.</span><span class="n">_conn</span><span class="o">.</span><span class="n">getUpdateService</span><span class="p">()</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">RoiI</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="uploading-a-2d-binary-image">
+<h2>Uploading a 2D binary image<a class="headerlink" href="#uploading-a-2d-binary-image" title="Link to this heading">#</a></h2>
+<p>To upload a 2D binary image, we convert the binary image into a mask and add it to the created ROI-object. For this,  we use the <a class="reference external" href="https://github.com/ome/omero-rois">omero-rois package</a> to turn this into OMERO-compatible ROIs. Finally, we upload:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roi</span><span class="o">.</span><span class="n">setImage</span><span class="p">(</span><span class="n">image_wrapper</span><span class="o">.</span><span class="n">_obj</span><span class="p">)</span>
+
+<span class="n">binary_mask</span> <span class="o">=</span> <span class="n">omero_rois</span><span class="o">.</span><span class="n">mask_from_binary_image</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
+<span class="n">roi</span><span class="o">.</span><span class="n">addShape</span><span class="p">(</span><span class="n">binary_mask</span><span class="p">)</span>
+
+<span class="c1"># post ROI to OMERO</span>
+<span class="n">uploaded_binary_roi</span> <span class="o">=</span> <span class="n">updateService</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this is what we get on OMERO:</p>
+<p><img alt="binary ROI" src="../../_images/ROI_omero_binary.png" /></p>
+</section>
+<section id="uploading-a-2d-labels-image">
+<h2>Uploading a 2D labels image<a class="headerlink" href="#uploading-a-2d-labels-image" title="Link to this heading">#</a></h2>
+<p>In many cases, we want to keep track of individual objects, though. For this we use labels images in image processing. Luckily, <a class="reference external" href="https://github.com/ome/omero-rois">omero-rois</a> provides a handy function for this usecase, too. Let’s create a new, empty ROI object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roi</span> <span class="o">=</span> <span class="n">RoiI</span><span class="p">()</span>
+<span class="n">roi</span><span class="o">.</span><span class="n">setImage</span><span class="p">(</span><span class="n">image_wrapper</span><span class="o">.</span><span class="n">_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask_labels</span> <span class="o">=</span> <span class="n">omero_rois</span><span class="o">.</span><span class="n">masks_from_label_image</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">raise_on_no_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of objects: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mask_labels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of objects:  293
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we are looking at multiple, separate ROIs, we need to add them to the ROI object one by one before we can upload the new ROIs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">mask_labels</span><span class="p">:</span>
+    <span class="n">roi</span><span class="o">.</span><span class="n">addShape</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+<span class="n">uploaded_roi</span> <span class="o">=</span> <span class="n">updateService</span><span class="o">.</span><span class="n">saveAndReturnObject</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output on OMERO now looks slightly different. The display is exactly before, but on the right-hand side we can see that we have two ROIs now. One for the previously uploaded binary ROI (see above), and another ROI, which is actually a <em>set of multiple ROIs</em>. You can click on it to expand it into the individual objects and highlight them in the webviewer.</p>
+<p><img alt="ROIs for labels" src="../../_images/ROI_omero_labels.png" /></p>
+</section>
+<section id="using-ezomero">
+<h2>Using ezomero<a class="headerlink" href="#using-ezomero" title="Link to this heading">#</a></h2>
+<p>So far, what we uploaded were actual segmentation outlines - e.g., mask objects. OMERO provides more flexibility with ROIs though. For instance, ROIs can specifically be defined as rectangles, points, lines, etc. To get a bit better control over these, you may want to use the <a class="reference external" href="https://thejacksonlaboratory.github.io/ezomero/ezomero.html#module-ezomero.rois">ezomero package</a>, which provides some convenient functions to interface OMERO.</p>
+<p>Let’s assume that we’d want to determine the bounding boxes of our detections and upload them as rectangles to OMERO, which is a usecase that’s very typical for object detection - see this <a class="reference external" href="https://biapol.github.io/blog/johannes_mueller/yolo_from_omero/train_yolo.html">tutorial on training a YOLO classifier on OMERO Rois as annotations</a>. Let’s first get some bouding boxes using the <a class="reference external" href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops">regionprops function from scikit-image</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we iterate over all the detections and create a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object from each bounding box. We add all Rectangles to a list and post them to OMERO through the <code class="docutils literal notranslate"> <span class="pre">ezomero.post_roi</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rectangles</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">properties</span><span class="p">):</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">rectangle</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">rois</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">y1</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span>
+    <span class="n">rectangles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rectangle</span><span class="p">)</span>
+
+<span class="n">roi</span> <span class="o">=</span> <span class="n">ezomero</span><span class="o">.</span><span class="n">post_roi</span><span class="p">(</span><span class="n">conn</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">image_id</span><span class="o">=</span><span class="n">image_id</span><span class="p">,</span> <span class="n">shapes</span><span class="o">=</span><span class="n">rectangles</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;human_mitosis_bounding_boxes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And that’s it. Checking the result again shows a collection of rectangles in an ROI collection. Note that the <code class="docutils literal notranslate"><span class="pre">ezomero.post_roi</span></code> function only accepts lists of shapes, independent of whether they are Lines, Rectangles or else. Thus, this function will always generate a collection of ROIs on OMERO.</p>
+<p><img alt="bounding boxes" src="../../_images/ROI_omero_bounding_boxes.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/ROIs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Readme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ROIs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Saving_ROI_3D.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Upload ROIs (3D)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uploading-a-2d-binary-image">Uploading a 2D binary image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uploading-a-2d-labels-image">Uploading a 2D labels image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-ezomero">Using ezomero</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By BiAPoL
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
