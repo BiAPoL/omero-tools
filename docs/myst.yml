@@ -2,7 +2,9 @@ version: 1
 project:
   title: OMERO Tools
   authors:
-    - name: BiAPoL
+    - name: Johannes Soltwedel
+      affiliation: German BioImaging – Society for Microscopy and Image Analysis
+      orcid: https://orcid.org/0000-0003-1273-2412
   toc:
     - file: index.md
     - file: notebooks\read_and_write\read_and_write.ipynb
