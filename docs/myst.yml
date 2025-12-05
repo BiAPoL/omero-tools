@@ -8,22 +8,22 @@ project:
       orcid: https://orcid.org/0000-0003-1273-2412
   toc:
     - file: index.md
-    - file: notebooks\read_and_write\read_and_write.ipynb
-    - file: notebooks\metadata\Readme.md
+    - file: notebooks/read_and_write/read_and_write.ipynb
+    - file: notebooks/metadata/Readme.md
       children:
-        - file: notebooks\metadata\01_key_value_pairs.ipynb
-        - file: notebooks\metadata\02_setting_pixel_sizes.ipynb
-        - file: notebooks\metadata\03_setting_channel_names.ipynb
-        - file: notebooks\metadata\04_tagging_data.ipynb
-        - file: notebooks\metadata\05_synchronize_tags.ipynb
-    - file: notebooks\ROIs\Readme.md
+        - file: notebooks/metadata/01_key_value_pairs.ipynb
+        - file: notebooks/metadata/02_setting_pixel_sizes.ipynb
+        - file: notebooks/metadata/03_setting_channel_names.ipynb
+        - file: notebooks/metadata/04_tagging_data.ipynb
+        - file: notebooks/metadata/05_synchronize_tags.ipynb
+    - file: notebooks/ROIs/Readme.md
       children:
-        - file: notebooks\ROIs\01_Saving_ROI_2D.ipynb
-        - file: notebooks\ROIs\02_Saving_ROI_3D.ipynb
-        - file: notebooks\ROIs\03_Downloading_ROIs_2D.ipynb
-        - file: notebooks\ROIs\04_Downloading_ROIs_3D.ipynb
-    - file: notebooks\tables\read_and_write_tables_from_omero.ipynb
-    - file: instructions\transfer_dataset.md
+        - file: notebooks/ROIs/01_Saving_ROI_2D.ipynb
+        - file: notebooks/ROIs/02_Saving_ROI_3D.ipynb
+        - file: notebooks/ROIs/03_Downloading_ROIs_2D.ipynb
+        - file: notebooks/ROIs/04_Downloading_ROIs_3D.ipynb
+    - file: notebooks/tables/read_and_write_tables_from_omero.ipynb
+    - file: instructions/transfer_dataset.md
 site:
   options:
     logo: biapol_logo.png
