@@ -4,6 +4,7 @@ project:
   authors:
     - name: Johannes Soltwedel
       affiliation: German BioImaging – Society for Microscopy and Image Analysis
+      github: jo-mueller
       orcid: https://orcid.org/0000-0003-1273-2412
   toc:
     - file: index.md
